@@ -1,0 +1,14 @@
+﻿<Window x:Class="Millionare.Score"
+        x:Name="scoreWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Millionare"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="Score" Height="450" Width="600">
+    <Grid x:Name="gMain">
+        <Button x:Name="backButton" Height="30" Width="70" Content="Назад" VerticalAlignment="Bottom" Margin="0,0,0,30" Click="BackButton_Click"></Button>
+    </Grid>
+</Window>
