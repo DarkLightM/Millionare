@@ -15,23 +15,14 @@ using System.Windows.Shapes;
 
 namespace Millionare
 {
-    /// <summary>
-    /// Логика взаимодействия для Score.xaml
-    /// </summary>
     public partial class Score : Window
     {
         public Score()
         {
             InitializeComponent();
+            Logic logic = new Logic();
             string path = "D:/Git/Millionare/Millionare/Millionare/bin/Debug/scores.txt";
-            StreamReader reader = new StreamReader(path);
-            Dictionary<string, int> scores = new Dictionary<string, int>();
-            string line;
-            while ((line = reader.ReadLine()) != null)
-            {
-                scores.Add(line.Split(' ')[0], Convert.ToInt32(line.Split(' ')[1]));
-            }
-            scores = scores.OrderByDescending(pair => pair.Value).ToDictionary(pair => pair.Key, pair => pair.Value);
+            Dictionary<string, int> scores = logic.FillTable(path);
             StackPanel sPanel = new StackPanel()
             {
                 VerticalAlignment = VerticalAlignment.Center,
@@ -50,7 +41,6 @@ namespace Millionare
                 if (counter == 9)
                     break;
             }
-            
             gMain.Children.Add(sPanel);
         }
 
