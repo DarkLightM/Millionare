@@ -24,7 +24,7 @@
                         </ContextMenu>
                     </CheckBox.ContextMenu>
                 </CheckBox>
-                <CheckBox x:Name="skipNext" Height="20" Width="20" Margin="5,5,0,0">
+                <CheckBox x:Name="skipNext" Height="20" Width="20" Margin="5,5,0,0" Checked="SkipNext_Checked">
                     <CheckBox.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="Пропуск следующего вопроса."></MenuItem>

@@ -30,11 +30,10 @@ namespace Millionare
             Logic logic = new Logic();
             Button button = (Button)sender;
             string text = button.Content.ToString();
-            List<string> trueAnswers = logic.FillTrueAnswers("D:/Git/Millionare/Millionare/Millionare/bin/Debug/trueAnswers.txt");
+            List<string> trueAnswers = logic.FillTrueAnswers("trueAnswers.txt");
             if ((text.Equals(trueAnswers[count - 1]) && count != trueAnswers.Count) || (bool)aegis.IsChecked)
             {
                 count++;
-                FillQuestion(count);
                 MessageBox.Show("Ты прав");
             }
             else if ((count == trueAnswers.Count) && (text.Equals(trueAnswers[count - 1])))
@@ -47,12 +46,19 @@ namespace Millionare
                 MessageBox.Show("Ты проиграл");
                 EndGame();
             }
+            if ((bool)skipNext.IsChecked && count != trueAnswers.Count)
+                count++;
+            else if (count == trueAnswers.Count)
+                MessageBox.Show("Нельзя пропустить последний вопрос");
+            FillQuestion(count);
             aegis.IsChecked = false;
+            skipNext.IsChecked = false;
+            MakeVisible();
         }
 
         public void FillScores()
         {
-            StreamReader reader = new StreamReader("D:/Git/Millionare/Millionare/Millionare/bin/Debug/money.txt");
+            StreamReader reader = new StreamReader("money.txt");
             string line;
             while ((line = reader.ReadLine()) != null)
             {
@@ -68,7 +74,7 @@ namespace Millionare
         public void FillQuestion(int number)
         {
             Logic logic = new Logic();
-            Dictionary<string, string[]> questions = logic.FillDictionary("D:/Git/Millionare/Millionare/Millionare/bin/Debug/questions.txt");
+            Dictionary<string, string[]> questions = logic.FillDictionary("questions.txt");
             string check = number.ToString() + ".";
             foreach (var pair in questions)
             {
@@ -98,9 +104,25 @@ namespace Millionare
         private void Half_Checked(object sender, RoutedEventArgs e)
         {
             Logic logic = new Logic();
-            List<string> trueAnswers = logic.FillTrueAnswers("D:/Git/Millionare/Millionare/Millionare/bin/Debug/trueAnswers.txt");
+            List<string> trueAnswers = logic.FillTrueAnswers("trueAnswers.txt");
             string trueAnswer = trueAnswers[count - 1];
+            Button[] buttonsToHide = logic.HideButton(new Button[] { b1, b2, b3, b4 }, trueAnswer);
+            buttonsToHide[0].Visibility = Visibility.Hidden;
+            buttonsToHide[1].Visibility = Visibility.Hidden;
+            cboxPanel.Children.Remove(half);
+        }
 
+        private void SkipNext_Checked(object sender, RoutedEventArgs e)
+        {
+            cboxPanel.Children.Remove(skipNext);
+        }
+
+        private void MakeVisible()
+        {
+            b1.Visibility = Visibility.Visible;
+            b2.Visibility = Visibility.Visible;
+            b3.Visibility = Visibility.Visible;
+            b4.Visibility = Visibility.Visible;
         }
     }
 }

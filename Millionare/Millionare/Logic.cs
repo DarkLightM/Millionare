@@ -49,19 +49,26 @@ namespace Millionare
             return scores;
         }
 
-        public Button[] DeleteButton(Button[] buttons, string trueAnswer)
+        public Button[] HideButton(Button[] buttons, string trueAnswer)
         {
-            Random rnd = new Random();
+            int pos = 0;
             Button[] result = new Button[2];
-            int first = rnd.Next(0,2);
-            int second = rnd.Next(2,4);
-        }
-
-        public bool CheckButton(Button button, string trueAnswer)
-        {
-            if (button.Content.Equals(trueAnswer))
-                return true;
-            return false;
+            for (int i = 0; i < 4; i++)
+            {
+                if (buttons[i].Content.Equals(trueAnswer))
+                    pos = i;
+            }
+            if (pos < 2)
+            {
+                result[0] = buttons[2];
+                result[1] = buttons[3];
+            }
+            else
+            {
+                result[0] = buttons[0];
+                result[1] = buttons[1];
+            }
+            return result;
         }
     }
 }

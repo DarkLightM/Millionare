@@ -21,7 +21,7 @@ namespace Millionare
         {
             InitializeComponent();
             Logic logic = new Logic();
-            string path = "D:/Git/Millionare/Millionare/Millionare/bin/Debug/scores.txt";
+            string path = "scores.txt";
             Dictionary<string, int> scores = logic.FillTable(path);
             StackPanel sPanel = new StackPanel()
             {
