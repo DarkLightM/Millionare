@@ -22,7 +22,7 @@ namespace Millionare
             InitializeComponent();
             Logic logic = new Logic();
             string path = "scores.txt";
-            Dictionary<string, int> scores = logic.FillTable(path);
+            Dictionary<string, string> scores = logic.FillTable(path);
             StackPanel sPanel = new StackPanel()
             {
                 VerticalAlignment = VerticalAlignment.Center,

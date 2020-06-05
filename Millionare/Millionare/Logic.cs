@@ -21,6 +21,7 @@ namespace Millionare
                 string[] arr = line.Split('?');
                 result.Add(arr[0], arr[1].Split('_'));
             }
+            reader.Close();
             return result;
         }
 
@@ -33,19 +34,21 @@ namespace Millionare
             {
                 trueAnswers.Add(line);
             }
+            reader.Close();
             return trueAnswers;
         }
 
-        public Dictionary<string, int> FillTable(string path)
+        public Dictionary<string, string> FillTable(string path)
         {
             StreamReader reader = new StreamReader(path);
-            Dictionary<string, int> scores = new Dictionary<string, int>();
+            Dictionary<string, string> scores = new Dictionary<string, string>();
             string line;
             while ((line = reader.ReadLine()) != null)
             {
-                scores.Add(line.Split(' ')[0], Convert.ToInt32(line.Split(' ')[1]));
+                scores.Add(line.Split(' ')[0], line.Split(' ')[1]);
             }
             scores = scores.OrderByDescending(pair => pair.Value).ToDictionary(pair => pair.Key, pair => pair.Value);
+            reader.Close();
             return scores;
         }
 
@@ -69,6 +72,21 @@ namespace Millionare
                 result[1] = buttons[1];
             }
             return result;
+        }
+
+        public void FillInScores(string path, string name, string scoresToWrite)
+        {
+            Dictionary<string, string> scores = FillTable(path);
+            if (scores.ContainsKey(name))
+                scores[name] = scoresToWrite;
+            else
+                scores.Add(name, scoresToWrite);
+            StreamWriter writer = new StreamWriter(path);
+            foreach (var pair in scores)
+            {
+                writer.WriteLine(pair.Key + " " + pair.Value.ToString());
+            }
+            writer.Close();
         }
     }
 }

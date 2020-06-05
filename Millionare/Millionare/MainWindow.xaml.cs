@@ -39,6 +39,8 @@ namespace Millionare
 
         private void GameButton_Click(object sender, RoutedEventArgs e)
         {
+            Logic logic = new Logic();
+            logic.FillInScores("scores.txt", nameBox.Text, "0");
             MainGame main = new MainGame();
             main.Show();
             mainMenu.Close();

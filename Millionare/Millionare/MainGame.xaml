@@ -6,6 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Millionare"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="MainGame" Height="450" Width="600">
     <DockPanel x:Name="dMain">
         <StackPanel x:Name="scorePanel" DockPanel.Dock="Right" Width="140" Background="Aqua">
@@ -47,6 +48,7 @@
             <Button x:Name="b3" Grid.Row="1" Grid.Column="0" Click="B_Click"></Button>
             <Button x:Name="b4" Grid.Row="1" Grid.Column="1" Click="B_Click"></Button>
         </Grid>
-        <TextBlock x:Name="questionBlock"></TextBlock>
+        <TextBlock x:Name="questionBlock" TextAlignment="Center" TextWrapping="Wrap"></TextBlock>
+        <TextBlock x:Name="player" Height="20" Width="200" VerticalAlignment="Top" HorizontalAlignment="Right"></TextBlock>
     </DockPanel>
 </Window>

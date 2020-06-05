@@ -17,7 +17,7 @@
         <StackPanel x:Name="infoPanel" Orientation="Horizontal" VerticalAlignment="Top">
             <TextBlock Text="Лучший результат:" Margin="5,5,5,0"></TextBlock>
             <TextBlock x:Name="bestResBlock" Margin="5,5.5,5,0" Text="10000"></TextBlock>
-            <TextBlock Width="190"></TextBlock>
+            <TextBlock Width="170"></TextBlock>
             <TextBlock Text="Введите ваше имя" Margin="5,5,5,0"></TextBlock>
             <TextBox x:Name="nameBox" Height="30" Width="150" Margin="5,0,5,0"></TextBox>
         </StackPanel>

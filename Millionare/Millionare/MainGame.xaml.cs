@@ -18,10 +18,11 @@ namespace Millionare
     public partial class MainGame : Window
     {
         int count = 1;
+        Dictionary<string, string> numberToMoney = new Dictionary<string, string>();
         public MainGame()
         {
             InitializeComponent();
-            FillScores();
+            FillProgress();
             FillQuestion(count);
         }
 
@@ -56,12 +57,14 @@ namespace Millionare
             MakeVisible();
         }
 
-        public void FillScores()
+        public void FillProgress()
         {
             StreamReader reader = new StreamReader("money.txt");
             string line;
             while ((line = reader.ReadLine()) != null)
             {
+                string[] arr = line.Split('\t');
+                numberToMoney.Add(arr[0], arr[1]);
                 TextBlock tb = new TextBlock()
                 {
                     Text = line,
@@ -91,6 +94,8 @@ namespace Millionare
 
         public void EndGame()
         {
+            Logic logic = new Logic();
+            logic.FillInScores("scores.txt", player.Text, numberToMoney[count.ToString()]);
             MainWindow mainMenu = new MainWindow();
             mainMenu.Show();
             mainGame.Close();
@@ -123,6 +128,18 @@ namespace Millionare
             b2.Visibility = Visibility.Visible;
             b3.Visibility = Visibility.Visible;
             b4.Visibility = Visibility.Visible;
+        }
+
+        private void EnterPlayerName()
+        {
+            Logic logic = new Logic();
+            string path = "scores.txt";
+            Dictionary<string, string> scores = logic.FillTable(path);
+            foreach (var pair in scores)
+            {
+                if (pair.Value.Equals("0"))
+                    player.Text = pair.Key;
+            }
         }
     }
 }
